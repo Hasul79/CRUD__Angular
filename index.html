@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>AngularJs CRUD operations demo example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script>
+    var app = angular.module('empApp', []);
+
+    app.controller('empCtrl', ['$scope', function($scope) {
+
+      //Employee collection
+      $scope.employee = [
+        {
+        id: 1,
+        name: 'Anil ',
+        age: 30,
+        web: 'www.code-sample.com'
+      },
+       {
+        id: 2,
+        name: 'Sunil ',
+        age: 25,
+        web: 'www.code-sample.com'
+      }, 
+      {
+        id: 3,
+        name: 'Sushil',
+        age: 20,
+        web: 'www.code-sample.com'
+      },
+       {
+        id: 4,
+        name: 'Aradhya',
+        age: 2,
+        web: 'www.code-sample.com'
+      },
+       {
+        id: 5,
+        name: 'Reena',
+        age: 25,
+        web: 'www.code-sample.com'
+      }
+    ];
+
+      //Delete Row
+      $scope.delete = function(index) {
+        $scope.employee.splice(index, 1);
+        //TODO: Login for server call and remove data;
+      }
+
+      //Update Row
+      $scope.update = function(index, data) {
+        alert(JSON.stringify(data));
+        //TODO: logic to render data on popups and update and set;
+      }
+
+      //Copy new Row
+      $scope.copy = function(index, data) {
+        var newRow = angular.copy(data);
+        $scope.employee.push(newRow);
+        //TODO: Logic for add new rows.
+      }
+    }]);
+  </script>
+</head>
+
+<body ng-app="empApp" ng-controller="empCtrl">
+  <div>
+    <h1>Employees</h1></div>
+  <div>
+    <h3>Id : Name : Age : Web</h3></div>
+  <div ng-repeat="emp in employee">
+    <div>
+      {{emp.id}} : {{emp.name}}  : {{emp.age}} : {{emp.web}}
+      <input type="button" value="Update" data-ng-click="update($index, emp)" />
+      <input type="button" value="Copy" data-ng-click="copy($index, emp)" />
+      <input type="button" value="delete" data-ng-click="delete($index)" />
+    </div>
+  </div>
+ </body>
+
+</html>
